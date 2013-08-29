@@ -74,7 +74,7 @@ module LinkPreview
 				@document
 			else
 				response = HTTParty.get(@uri)
-				@uri = response.request.last_uri
+				@uri = response.request.last_uri.to_s
 				@document = Nokogiri::HTML(response)
 			end
     end
