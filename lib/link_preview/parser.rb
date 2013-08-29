@@ -70,7 +70,13 @@ module LinkPreview
     private
 
     def document
-      @document ||= Nokogiri::HTML(HTTParty.get(@uri))
+      if @document
+				@document
+			else
+				response = HTTParty.get(@uri)
+				@uri = response.request.last_uri
+				@document = Nokogiri::HTML(response)
+			end
     end
   end
 end
